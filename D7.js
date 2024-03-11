@@ -3,61 +3,79 @@
   prima e gli ultimi 3 della seconda. Converti la stringa risultante in maiuscolo e mostrala con un console.log().
 */
 
-const upperCase = function (firstWord, secondWord) {
-  let words = [firstWord, secondWord]
-  words[0].toUpperCase()
+const upperCase = function (str1, str2) {
+  const firstTwo = str1.substring(0, 2)
+  const lastThree = str2.substring(str2.length - 3)
+
+  const fullStr = firstTwo.concat(lastThree)
+  return fullStr.toUpperCase()
 }
-console.log(upperCase('ciao'))
+console.log(upperCase('ciao', 'epicoders'))
 /* ESERCIZIO 2 (for)
   Scrivi una funzione che torni un array di 10 elementi; ognuno di essi deve essere un valore random compreso tra 0 e 100 (incluso).
 */
-let randomNum = []
 
-for (let i = 0; i < 10; i++) {
-  let random = Math.random() * 101
-  randomNum.push(random)
+const tenRandNum = function () {
+  let randomNum = []
+  for (let i = 0; i < 10; i++) {
+    let random = Math.floor(Math.random() * 101)
+    randomNum.push(random)
+  }
+  return randomNum
 }
 
-console.log(randomNum)
+console.log(tenRandNum())
 
 /* ESERCIZIO 3 (filter)
   Scrivi una funzione per ricavare solamente i valori PARI da un array composto da soli valori numerici
 */
 const numbers = [2, 3, 4, 6, 7, 8, 9, 34, 22, 21, 67, 89]
 
-const isEven = function () {
-  for (let i = 0; i < numbers.length; i++) return numbers[i] % 2 === 0
+const isEven = function (array) {
+  const filtered = array.filter((num) => num % 2 === 0)
+
+  return filtered
 }
 
-console.log(numbers.filter(isEven))
+console.log(isEven(numbers))
 
 /* ESERCIZIO 4 (forEach)
   Scrivi una funzione per sommare i numeri contenuti in un array
 */
-
-let sum = 0
-
-numbers.forEach((num) => (sum += num))
-console.log(sum)
+const summedNums = function (array) {
+  let sum = 0
+  numbers.forEach((num) => (sum += num))
+  return sum
+}
+console.log(summedNums(numbers))
 
 /* ESERCIZIO 5 (reduce)
   Scrivi una funzione per sommare i numeri contenuti in un array
 */
 
-const sum2 = numbers.reduce(
-  (accumulator, currentValue) => accumulator + currentValue,
-  0
-)
-console.log(sum2)
+const summedNumsReduce = function (array) {
+  return array.reduce((acc, elem) => acc + elem, 0)
+}
+console.log(summedNumsReduce(numbers))
 /* ESERCIZIO 6 (map)
   Scrivi una funzione che, dato un array di soli numeri e un numero n come parametri, ritorni un secondo array con tutti i valori del precedente incrementati di n
 */
 
+const incrementArray = function (array, n) {
+  return array.map((num) => num + n)
+}
+
+console.log(incrementArray(numbers, 4))
 /* ESERCIZIO 7 (map)
   Scrivi una funzione che, dato un array di stringhe, ritorni un nuovo array contenente le lunghezze delle rispettive stringhe dell'array di partenza
   es.: ["EPICODE", "is", "great"] => [7, 2, 5]
 */
 
+const strLength = function (array) {
+  return array.map((str) => str.length)
+}
+
+console.log(strLength(['EPICODE', 'is', 'great']))
 /* ESERCIZIO 8 (forEach o for)
   Scrivi una funzione per creare un array contenente tutti i valori DISPARI da 1 a 99.
 */
@@ -190,8 +208,20 @@ const movies = [
   Scrivi una funzione per trovare il film più vecchio nell'array fornito.
 */
 
-movies.forEach((Year) => {})
+const oldestMovie = function (array) {
+  let oldestMovie = array[0]
 
+  array.forEach((movie) => {
+    const currentMovieYear = parseInt(movie.Year)
+
+    if (currentMovieYear < oldestMovie) {
+      console.log(movie.Year)
+      oldestMovie = currentMovieYear
+    }
+  })
+}
+
+console.log(oldestMovie(movies))
 /* ESERCIZIO 10
   Scrivi una funzione per ottenere il numero di film contenuti nell'array fornito.
 */
